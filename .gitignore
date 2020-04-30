@@ -159,3 +159,8 @@ fabric.properties
 .idea/httpRequests
 
 node_modules/
+
+db.sqlite3
+static/*.js
+webpack-stats.json
+frontend/package-lock.json
