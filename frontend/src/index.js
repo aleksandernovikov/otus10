@@ -1,15 +1,22 @@
-import axios from 'axios';
-import './style.css'
-import 'hogan.js'
+import axios from 'axios'
+import Handlebars from 'handlebars'
 
-// let t = '<tr><td></td></tr>'
 function load_courses_data() {
     axios.get('/api/courses')
         .then(response => {
-        console.log(response.data)
-    })
+            let src = `{{#each this}}<tr>
+                            <td>{{title}}</td>
+                            <td>{{#each teachers}}{{first_name}} {{last_name}}<br>{{/each}}</td>
+                            <td>{{start_date}}</td>
+                            <td>{{end_date}}</td>
+                            <td>{{#if finished}}Да{{else}}Нет{{/if}}</td>
+                        </tr>{{/each}}`
+            let t = Handlebars.compile(src)
+            document.querySelector('.courses-table').innerHTML = t(response.data)
+        })
         .catch(error => {
             alert(error)
         })
 }
+
 load_courses_data()

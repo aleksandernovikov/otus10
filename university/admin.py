@@ -5,4 +5,4 @@ from university.models import Course
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    pass
+    filter_horizontal = 'teachers',

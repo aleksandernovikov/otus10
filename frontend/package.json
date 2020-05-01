@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "handlebars": "^4.7.6",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-bundle-tracker": "^0.4.3",
