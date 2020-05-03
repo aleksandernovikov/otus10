@@ -7,6 +7,7 @@
 # Начальные действия
 
 * переходим в корень проекта
+* создаем/активируем виртуальное окружение (`sudo apt install python3-venv -y && python3 -m venv venv && source venv/bin/activate`)
 * устанавливаем зависимости python `pip install -r requirements.txt`
 * выполняем миграции БД `./manage.py migrate`
 * загружаем фикстуры `loaddata start`

@@ -23,5 +23,4 @@ const loadCoursesData = () => {
             alert(error)
         })
 }
-
-export default loadCoursesData
+window.loadCoursesData = loadCoursesData
