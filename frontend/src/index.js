@@ -2,7 +2,7 @@ import axios from 'axios'
 import Handlebars from 'handlebars'
 import {ENDPOINTS} from "../config/urls";
 
-function loadCoursesData() {
+const loadCoursesData = () => {
     axios.get(ENDPOINTS['coursesList'])
         .then(response => {
             let src = `{{#with this as | courses |}}
@@ -24,4 +24,4 @@ function loadCoursesData() {
         })
 }
 
-loadCoursesData();
+export default loadCoursesData
