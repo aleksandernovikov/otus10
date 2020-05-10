@@ -1,14 +1,15 @@
 var path = require('path');
-var webpack = require('webpack');
+// var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
 
 let conf = {
     context: __dirname,
-    entry: './src/index',
+    entry: './src/main',
 
     output: {
         path: path.resolve('../static/'),
-        filename: "[name]-[hash].js"
+        filename: "[name]-[hash].js",
+        publicPath: 'static/'
     },
 
     module: {
@@ -19,7 +20,11 @@ let conf = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ["@babel/preset-env"]
+                        presets: ["@babel/preset-env"],
+                        plugins: [
+                            "@babel/plugin-transform-react-jsx",
+                            "@babel/plugin-proposal-class-properties"
+                        ]
                     }
                 }
             },
