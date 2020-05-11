@@ -4,11 +4,8 @@ import Row from "./row";
 
 
 export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: true
-        }
+    state = {
+        loading: true
     }
 
     componentDidMount() {
@@ -22,9 +19,7 @@ export default class extends React.Component {
 
     render() {
         if (this.state.loading === false) {
-            let data = [...this.state.data]
-
-            let rows = data.map((item, i) => {
+            let rows = this.state.data.map((item) => {
                 return <Row
                     title={item.title}
                     teachers={item.teachers}
@@ -33,7 +28,6 @@ export default class extends React.Component {
                     finished={item.finished}
                 />
             })
-
             return <tbody>{rows}</tbody>
         }
         return <div>loading...</div>

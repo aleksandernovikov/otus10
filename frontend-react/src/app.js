@@ -11,6 +11,5 @@ export default function (props) {
                 <TableContent/>
             </table>
         </div>
-
     );
 }

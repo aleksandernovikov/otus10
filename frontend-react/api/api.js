@@ -8,7 +8,6 @@ const axiosInstance = Axios.create({
 
 export function getCoursesList() {
     return axiosInstance.get('courses').then(response => {
-        console.log(response)
         if (response.status == 200) {
             return response.data
         } else {
