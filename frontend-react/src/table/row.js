@@ -3,11 +3,9 @@ import React from 'react'
 export default class Row extends React.Component {
 
     getTeachersString(teachers) {
-        let teachers_array = []
-        teachers.forEach(teacher => {
-            teachers_array.push(teacher.first_name + ' ' + teacher.last_name)
-        })
-        return teachers_array.join(', ')
+        return teachers.map(teacher => {
+            return `${teacher.first_name} ${teacher.last_name}`
+        }).join(', ')
     }
 
     render() {
