@@ -20,3 +20,11 @@ export default class Row extends React.Component {
         )
     }
 }
+
+Row.defaultProps = {
+    title: 'n/a',
+    teachers: [],
+    start_date: '-',
+    end_date: '-',
+    finished: 'Нет'
+}
