@@ -6,7 +6,6 @@ from university.models import Course
 User = get_user_model()
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -18,4 +17,4 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = 'title', 'teachers', 'start_date', 'end_date', 'finished'
+        fields = 'id', 'title', 'teachers', 'start_date', 'end_date', 'finished'

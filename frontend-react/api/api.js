@@ -6,13 +6,10 @@ const axiosInstance = Axios.create({
     timeout: 1000
 });
 
-export function getCoursesList() {
-    return axiosInstance.get('courses').then(response => {
-        if (response.status == 200) {
-            return response.data
-        } else {
-            throw new Error('Server returns ' + response.status)
-        }
-
-    })
+export async function getCoursesList() {
+    let response = await axiosInstance.get('courses')
+    if (response.status !== 200) {
+        throw new Error('Server returns ' + response.status)
+    }
+    return response.data
 }

@@ -1,23 +1,19 @@
-from rest_framework import mixins, generics
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
+from rest_framework import viewsets
+from rest_framework.permissions import IsAdminUser, AllowAny
 
+from api.mixins import DefaultMixin
 from api.serializers import CourseSerializer
 from university.models import Course
 
 
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'courses': reverse('course-list', request=request, format=format),
-    })
-
-
-class ListCourses(mixins.ListModelMixin,
-                  generics.GenericAPIView):
+class ListCourses(DefaultMixin, viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    permission_classes_by_action = {
+        'list': [AllowAny],
+        'create': [IsAdminUser],
+        'put': [IsAdminUser],
+        'patch': [IsAdminUser],
+        'delete': [IsAdminUser],
+    }

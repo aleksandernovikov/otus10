@@ -1,9 +1,15 @@
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from api.views import api_root, ListCourses
+from api.views import ListCourses
 
-urlpatterns = format_suffix_patterns([
-    path('', api_root),
-    path('courses', ListCourses.as_view(), name='course-list'),
-])
+api_router = DefaultRouter()
+
+api_router.register('courses', ListCourses, basename='courses')
+
+urlpatterns = [
+                  # auth
+                  path('token/get/', TokenObtainPairView.as_view(), name='obtain-token-pair'),
+                  path('token/refresh/', TokenRefreshView.as_view(), name='refresh-token')
+              ] + api_router.urls
