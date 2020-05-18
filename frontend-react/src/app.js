@@ -1,17 +1,18 @@
 import React from 'react'
-import TableHeading from './table/heading'
-import TableContent from './table/content'
-import LoginForm from './login_form'
+import {HashRouter as Router, Switch, Route} from "react-router-dom"
 
-export default function (props) {
+import Home from './pages/home-page'
+import CreateCourse from './components/courses/createcourse'
+import ViewCourse from './pages/course-details-page'
+
+export default function () {
     return (
-        <div>
-            <LoginForm />
-            <h1>Список курсов</h1><br/>
-            <table className="table">
-                <TableHeading />
-                <TableContent/>
-            </table>
-        </div>
-    );
+        <Router>
+            <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route path='/course/:id' component={ViewCourse}/>
+                <Route path='/create-course' component={CreateCourse}/>
+            </Switch>
+        </Router>
+    )
 }

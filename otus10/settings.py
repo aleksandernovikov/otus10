@@ -1,6 +1,8 @@
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from datetime import timedelta
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -27,6 +29,7 @@ INSTALLED_APPS = [
     # 3rd party applications
     'webpack_loader',
     'rest_framework',
+    'rest_framework_simplejwt',
 
     # my applications
     'university',
@@ -126,8 +129,22 @@ WEBPACK_LOADER = {
 }
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.MultiPartParser',
-    ]
+    ],
+
+    'EXCEPTION_HANDLER': 'otus10.drf_error_handling.custom_exception_handler',
+
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S.%f%z",
+
+    'DATE_FORMAT': "%d.%m.%Y",
+    'DATE_INPUT_FORMATS': ["%d.%m.%Y", "%d-%m-%Y"]
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
 }

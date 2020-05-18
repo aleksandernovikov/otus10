@@ -1,7 +1,7 @@
 import React from 'react';
-import {getCoursesList} from '../../api/api'
+import {getCoursesList} from '../../api'
 import Row from "./row";
-
+import {Link} from "react-router-dom";
 
 export default class extends React.Component {
     state = {
@@ -21,7 +21,7 @@ export default class extends React.Component {
         if (this.state.loading === false) {
             let rows = this.state.data.map((item) => {
                 return <Row
-                    title={item.title}
+                    title={<Link to={`/course/${item.id}`}>{item.title}</Link>}
                     teachers={item.teachers}
                     start_date={item.start_date}
                     end_date={item.end_date}
@@ -30,6 +30,6 @@ export default class extends React.Component {
             })
             return <tbody>{rows}</tbody>
         }
-        return <div>loading...</div>
+        return <div>Загрузка...</div>
     }
 }

@@ -2,11 +2,11 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from api.views import ListCourses
+from api.views import CoursesViewSet, UserViewSet
 
 api_router = DefaultRouter()
-
-api_router.register('courses', ListCourses, basename='courses')
+api_router.register('courses', CoursesViewSet, basename='courses')
+api_router.register('user', UserViewSet, basename='user')
 
 urlpatterns = [
                   # auth

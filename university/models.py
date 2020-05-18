@@ -6,6 +6,16 @@ from django.db import models
 User = get_user_model()
 
 
+class CourseStudent(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+
+    course_entry_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.student} {self.course}'
+
+
 class Course(models.Model):
     """
     Учебный курс
@@ -19,6 +29,8 @@ class Course(models.Model):
         blank=True,
     )
 
+    students = models.ManyToManyField(User, blank=True, through=CourseStudent)
+
     start_date = models.DateField('Сourse start date', default=datetime.date.today, blank=True, null=True)
     end_date = models.DateField('Course end date', blank=True, null=True)
 
@@ -30,3 +42,7 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    def enroll_student(self, user):
+        entry = CourseStudent(student=user, course=self)
+        entry.save()

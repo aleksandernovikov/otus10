@@ -1,5 +1,5 @@
 import React from 'react'
-import {getTokens} from "../../api/api";
+import {getTokens} from "../../api";
 
 export default class extends React.Component {
     state = {
@@ -8,13 +8,8 @@ export default class extends React.Component {
         logged_in: false
     }
 
-    saveLogin = (e) => {
-        this.setState({
-            login: e.target.value
-        })
-    }
-
-    onSubmit = (e) => {
+    onSubmitHandle = (e) => {
+        e.preventDefault()
         getTokens(this.state.login, this.state.password).then(response => {
             this.setState({
                 logged_in: true
@@ -24,7 +19,7 @@ export default class extends React.Component {
 
     render() {
         return (
-            <div className='col-3 my-3'>
+            <form onSubmit={this.onSubmitHandle}>
                 <input type="text"
                        placeholder='Login'
                        className='form-control form-control-sm'
@@ -36,11 +31,8 @@ export default class extends React.Component {
                     className='form-control form-control-sm mt-1'
                     onBlur={(e) => this.setState({password: e.target.value})}
                 />
-                <button
-                    className='btn btn-primary btn-sm mt-1'
-                    onClick={this.onSubmit}>Login
-                </button>
-            </div>
+                <button className='btn btn-primary btn-sm mt-1'>Login</button>
+            </form>
         )
     }
 }
