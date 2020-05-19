@@ -3,14 +3,18 @@ import UserInfo from '../components/userinfo'
 import TableHeading from "../components/table/heading";
 import TableContent from "../components/table/content";
 import React from "react";
+import {getAccessToken} from "../services/localStorageService";
 
 export default class extends React.Component {
     render() {
-        let user = () => {
-            if (localStorage.getItem('access'))
-                return <UserInfo/>
+        function user() {
+            // console.log('token')
+            const token = getAccessToken()
+
+            if (token) return <UserInfo/>
             return <LoginForm/>
         }
+
         return (
             <div className='row bg-white rounded my-3 p3'>
                 <div className="col-3 py-2">

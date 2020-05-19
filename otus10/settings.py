@@ -145,6 +145,7 @@ REST_FRAMEWORK = {
     'DATE_INPUT_FORMATS': ["%d.%m.%Y", "%d-%m-%Y"]
 }
 
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=90),
 }
