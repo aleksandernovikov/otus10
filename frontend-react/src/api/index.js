@@ -23,7 +23,8 @@ export async function getTokens(username, password) {
     let token_user_info = extractTokenData(response.data.access)
     // let expired = token_user_info.exp
 
-    saveToStorage({...response.data,
+    saveToStorage({
+        ...response.data,
         expired: token_user_info.exp,
         username: token_user_info.username,
         firstName: token_user_info.firstName,
@@ -32,11 +33,6 @@ export async function getTokens(username, password) {
     return response.data
 }
 
-/* Получим информацию о пользователе */
-export async function getUserInfo() {
-    let response = await axiosInstance.get('user/')
-    return response.data
-}
 
 /* Получим список курсов */
 export async function getCoursesList() {
@@ -45,18 +41,22 @@ export async function getCoursesList() {
 }
 
 /* Детали курса */
-export async function getCourseDetails(id) {
-    let response = await axiosInstance.get(`courses/${id}/`)
+export async function getCourseDetails(courseId) {
+    let response = await axiosInstance.get(`courses/${courseId}/`)
     return response.data
 }
 
 /* создание курса */
-export async function createCourse(title, startDate, endDate, finished = false) {
-    let response = await axiosInstance.post('courses/', {
-        title: title,
-        start_date: startDate,
-        end_date: endDate,
-        finished: finished
-    })
-    return response.data
+// export async function createCourse(title, startDate, endDate, finished = false) {
+//     let response = await axiosInstance.post('courses/', {
+//         title: title,
+//         start_date: startDate,
+//         end_date: endDate,
+//         finished: finished
+//     })
+//     return response.data
+// }
+export async function courseEnroll(courseId) {
+    let response = await axiosInstance.post(`courses/${courseId}/enroll/`)
+    return response.status === 201
 }

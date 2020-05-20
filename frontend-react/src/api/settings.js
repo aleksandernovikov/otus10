@@ -9,7 +9,7 @@ const axiosInstance = Axios.create({
 });
 
 axiosInstance.interceptors.request.use(function (request) {
-    console.log('request', request)
+    // console.log('request', request)
     let token = getAccessToken()
     if (token !== null && request.method !== 'get' || request.url === 'user/') {
         request.headers.Authorization = `Bearer ${token}`;

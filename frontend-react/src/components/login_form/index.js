@@ -14,6 +14,7 @@ export default class extends React.Component {
             this.setState({
                 logged_in: true
             })
+            this.props.onChange(true)
         })
     }
 
@@ -31,7 +32,7 @@ export default class extends React.Component {
                     className='form-control form-control-sm mt-1'
                     onBlur={(e) => this.setState({password: e.target.value})}
                 />
-                <button className='btn btn-primary btn-sm mt-1'>Login</button>
+                <button className='btn btn-primary btn-sm mt-1'>Войти</button>
             </form>
         )
     }

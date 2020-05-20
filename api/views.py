@@ -47,5 +47,7 @@ class CoursesViewSet(DefaultMixin, viewsets.ModelViewSet):
         user = request.user
         course = self.get_object()
 
-        course.enroll_student(user)
-        return Response(status=status.HTTP_201_CREATED)
+        success = course.enroll_student(user)
+        if success:
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_200_OK)

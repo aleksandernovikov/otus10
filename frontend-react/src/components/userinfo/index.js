@@ -1,38 +1,36 @@
 import React from "react";
 import {Button} from "react-bootstrap";
+import {getAccessToken, logout} from "../../services/localStorageService";
+import LoginForm from "../login_form";
 
 export default class extends React.Component {
     state = {
-        loading: true,
-        username: '',
-        firstName: '',
-        lastName: ''
+        loading: false,
+        isUserLoggedIn: Boolean(getAccessToken()),
+        username: localStorage.getItem('username'),
     }
 
     logout = () => {
-        const fields = ['access', 'refresh', 'expired', 'username', 'firstName', 'lastName']
-        for (let key of fields) {
-            console.log(key)
-            localStorage.removeItem(key)
-        }
+        logout()
         this.setState({
+            isUserLoggedIn: false,
             username: '',
-            firstName: '',
-            lastName: ''
         })
     }
 
-    componentDidMount() {
+    userChange = (loggedIn) => {
+        // console.log('userChange', loggedIn)
         this.setState({
-            loading: false,
+            isUserLoggedIn: loggedIn,
             username: localStorage.getItem('username'),
-            firstName: localStorage.getItem('firstName'),
-            lastName: localStorage.getItem('lastName')
         })
     }
 
     render() {
         if (!this.state.loading) {
+            if (!this.state.isUserLoggedIn) {
+                return <LoginForm onChange={this.userChange}/>
+            }
             return <div className='h6'>Привет, {this.state.username}! <Button onClick={this.logout}>Выход</Button></div>
         }
         return <div>Загрузка...</div>

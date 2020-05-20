@@ -15,6 +15,9 @@ class CourseStudent(models.Model):
     def __str__(self):
         return f'{self.student} {self.course}'
 
+    class Meta:
+        unique_together = ('student_id', 'course_id')
+
 
 class Course(models.Model):
     """
@@ -44,5 +47,10 @@ class Course(models.Model):
         return self.title
 
     def enroll_student(self, user):
-        entry = CourseStudent(student=user, course=self)
-        entry.save()
+        exists = CourseStudent.objects.filter(student=user, course=self).exists()
+
+        if not exists:
+            entry = CourseStudent(student=user, course=self)
+            entry.save()
+
+        return not exists
