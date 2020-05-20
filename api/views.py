@@ -3,12 +3,17 @@ from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from api.mixins import DefaultMixin
-from api.serializers import CourseSerializer, UserSerializer
+from api.serializers import CourseSerializer, UserSerializer, CustomTokenObtainPairSerializer
 from university.models import Course
 
 User = get_user_model()
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):

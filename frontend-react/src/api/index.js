@@ -21,8 +21,14 @@ export async function getTokens(username, password) {
     // Получим токены доступа и сохраним их
     let response = await axiosInstance.post('token/get/', {username, password})
     let token_user_info = extractTokenData(response.data.access)
-    let expired = token_user_info.exp
-    saveToStorage({...response.data, expired})
+    // let expired = token_user_info.exp
+
+    saveToStorage({...response.data,
+        expired: token_user_info.exp,
+        username: token_user_info.username,
+        firstName: token_user_info.firstName,
+        lastName: token_user_info.lastName
+    })
     return response.data
 }
 

@@ -4,6 +4,7 @@ import {extractTokenData} from "../api";
 import Axios from "axios";
 
 export function saveToStorage(object_data) {
+
     for (let key in object_data) {
         if (object_data.hasOwnProperty(key)) {
             console.log(key, object_data[key])
@@ -14,35 +15,63 @@ export function saveToStorage(object_data) {
 
 function refreshToken() {
     const refreshToken = localStorage.getItem('refresh')
+    console.log('refreshToken', refreshToken)
     let token = ''
+    if (refreshToken) {
+        Axios.post('/api/token/refresh/', {
+            refresh: refreshToken
+        }).then(response => {
+            token = response.data.access
+            localStorage.setItem('access', token)
+            console.log('refreshToken()', token)
+        }).catch(e => {
+            console.log('error', e)
 
-    Axios.post('/api/token/refresh/', {
-        refresh: refreshToken
-    }).then(response => {
-        token = response.data.access
-        localStorage.setItem('access', token)
-        console.log('refreshToken()', token)
-    })
-    return localStorage.getItem('access')
+            localStorage.removeItem('access')
+            localStorage.removeItem('refresh')
+            return null
+        })
+        return localStorage.getItem('access')
+    }
+    return null
 }
 
 function isTokenExpired(limit = 60) {
-    const now_in_seconds = Math.floor(new Date().getTime() / 1000)
-    const token_time = localStorage.getItem('expired')
-    const dif = token_time - now_in_seconds
+    const tokenTime = localStorage.getItem('expired')
 
-    let result = (!token_time || dif < limit)
-    console.log('isTokenExpired', result, dif)
-
-    return result
+    if (localStorage.getItem('access') && tokenTime) {
+        const now_in_seconds = Math.floor(new Date().getTime() / 1000)
+        const dif = tokenTime - now_in_seconds
+        let result = (!tokenTime || dif < limit)
+        console.log('isTokenExpired', result, dif)
+        return result
+    }
+    return null
 }
 
 export function getAccessToken() {
-    if (isTokenExpired()) {
-        console.log('token expired')
-        let token = refreshToken()
-        let data = extractTokenData(token)
-        saveToStorage({access: token, expired: data.exp})
+    if (localStorage.getItem('access')) {
+        if (isTokenExpired()) {
+            console.log('token expired')
+            let token = refreshToken()
+
+            if (token) {
+                let data = extractTokenData(token)
+                saveToStorage({
+                    access: token,
+                    expired: data.exp,
+                    username: data.username,
+                    firstName: data.firstName,
+                    lastName: data.lastName
+                })
+            }
+        }
+        return localStorage.getItem('access')
     }
-    return localStorage.getItem('access')
+    console.log('token not found')
+    return null
+}
+
+export function logout() {
+
 }
