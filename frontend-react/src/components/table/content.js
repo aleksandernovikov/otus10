@@ -19,15 +19,16 @@ export default class extends React.Component {
 
     render() {
         if (this.state.loading === false) {
-            let rows = this.state.data.map((item) => {
-                return <Row
+            const rows = this.state.data.map((item) =>
+
+                <Row
                     title={<Link to={`/course/${item.id}`}>{item.title}</Link>}
                     teachers={item.teachers}
                     start_date={item.start_date}
                     end_date={item.end_date}
                     finished={item.finished}
                 />
-            })
+            )
             return <tbody>{rows}</tbody>
         }
         return <div>Загрузка...</div>

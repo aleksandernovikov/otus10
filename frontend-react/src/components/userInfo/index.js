@@ -6,7 +6,7 @@ import LoginForm from "../loginForm";
 export default class extends React.Component {
     state = {
         loading: false,
-        isUserLoggedIn: Boolean(getAccessToken()),
+        isUserLoggedIn: !!getAccessToken(),
         username: localStorage.getItem('username'),
     }
 

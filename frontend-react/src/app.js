@@ -8,6 +8,7 @@ import ViewCourse from './pages/courseDetailsPage'
 export default function () {
     return (
         <Router>
+            
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route path='/course/:id' component={ViewCourse}/>

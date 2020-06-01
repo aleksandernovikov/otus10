@@ -8,9 +8,9 @@ export default class extends React.Component {
         logged_in: false
     }
 
-    onSubmitHandle = (e) => {
-        e.preventDefault()
-        getTokens(this.state.login, this.state.password).then(response => {
+    onLoginClick = (e) => {
+        const {login, password} = this.state;
+        getTokens(login, password).then(response => {
             this.setState({
                 logged_in: true
             })
@@ -20,7 +20,7 @@ export default class extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmitHandle}>
+            <form>
                 <input type="text"
                        placeholder='Login'
                        className='form-control form-control-sm'
@@ -32,7 +32,7 @@ export default class extends React.Component {
                     className='form-control form-control-sm mt-1'
                     onBlur={(e) => this.setState({password: e.target.value})}
                 />
-                <button className='btn btn-primary btn-sm mt-1'>Войти</button>
+                <button className='btn btn-primary btn-sm mt-1' onClick={this.onLoginClick}>Войти</button>
             </form>
         )
     }
