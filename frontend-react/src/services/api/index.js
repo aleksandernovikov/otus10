@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import axiosInstance from "./settings";
-import {saveToStorage} from "../services/localStorageService";
+import {saveToStorage} from "../localStorageService";
 
 export function extractTokenData(token) {
     let parts = token.split('.')
@@ -21,7 +21,6 @@ export async function getTokens(username, password) {
     // Получим токены доступа и сохраним их
     let response = await axiosInstance.post('token/get/', {username, password})
     let token_user_info = extractTokenData(response.data.access)
-    // let expired = token_user_info.exp
 
     saveToStorage({
         ...response.data,
@@ -47,15 +46,16 @@ export async function getCourseDetails(courseId) {
 }
 
 /* создание курса */
-// export async function createCourse(title, startDate, endDate, finished = false) {
-//     let response = await axiosInstance.post('courses/', {
-//         title: title,
-//         start_date: startDate,
-//         end_date: endDate,
-//         finished: finished
-//     })
-//     return response.data
-// }
+export async function createCourse(title, startDate, endDate, finished = false) {
+    let response = await axiosInstance.post('courses/', {
+        title: title,
+        start_date: startDate,
+        end_date: endDate,
+        finished: finished
+    })
+    return response.data
+}
+
 export async function courseEnroll(courseId) {
     let response = await axiosInstance.post(`courses/${courseId}/enroll/`)
     return response.status === 201

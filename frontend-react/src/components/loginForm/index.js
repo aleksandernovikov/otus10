@@ -1,5 +1,5 @@
 import React from 'react'
-import {getTokens} from "../../api";
+import {getTokens} from "../../services/api";
 
 export default class extends React.Component {
     state = {

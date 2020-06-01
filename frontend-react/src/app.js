@@ -1,9 +1,9 @@
 import React from 'react'
 import {HashRouter as Router, Switch, Route} from "react-router-dom"
 
-import Home from './pages/home-page'
-import CreateCourse from './components/courses/createcourse'
-import ViewCourse from './pages/course-details-page'
+import Home from './pages/homePage'
+import CreateCourse from './components/courses/createCourse'
+import ViewCourse from './pages/courseDetailsPage'
 
 export default function () {
     return (

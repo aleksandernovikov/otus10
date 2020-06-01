@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "react-bootstrap";
 import {getAccessToken, logout} from "../../services/localStorageService";
-import LoginForm from "../login_form";
+import LoginForm from "../loginForm";
 
 export default class extends React.Component {
     state = {
@@ -19,7 +19,6 @@ export default class extends React.Component {
     }
 
     userChange = (loggedIn) => {
-        // console.log('userChange', loggedIn)
         this.setState({
             isUserLoggedIn: loggedIn,
             username: localStorage.getItem('username'),

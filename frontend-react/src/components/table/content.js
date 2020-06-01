@@ -1,5 +1,5 @@
 import React from 'react';
-import {getCoursesList} from '../../api'
+import {getCoursesList} from '../../services/api'
 import Row from "./row";
 import {Link} from "react-router-dom";
 

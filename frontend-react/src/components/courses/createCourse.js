@@ -1,6 +1,6 @@
 import React from "react";
 import {Form, Button} from 'react-bootstrap';
-import {createCourse} from "../../api";
+import {createCourse} from "../../services/api";
 
 export default class extends React.Component {
     state = {
@@ -12,10 +12,7 @@ export default class extends React.Component {
 
     formSubmit = (event) => {
         event.preventDefault()
-        createCourse(this.state.title, this.state.startDate, this.state.endDate, this.state.finished).then(result => {
-            console.log()
-        })
-
+        createCourse(this.state.title, this.state.startDate, this.state.endDate, this.state.finished)
     }
 
     render() {

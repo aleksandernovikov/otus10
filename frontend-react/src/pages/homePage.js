@@ -1,4 +1,4 @@
-import UserInfo from '../components/userinfo'
+import UserInfo from '../components/userInfo'
 import TableHeading from "../components/table/heading";
 import TableContent from "../components/table/content";
 import React from "react";

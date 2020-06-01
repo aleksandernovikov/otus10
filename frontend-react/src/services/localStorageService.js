@@ -1,13 +1,11 @@
 import '@babel/polyfill'
 
-import {extractTokenData} from "../api";
+import {extractTokenData} from "./api";
 import Axios from "axios";
 
 export function saveToStorage(object_data) {
-
     for (let key in object_data) {
         if (object_data.hasOwnProperty(key)) {
-            // console.log(key, object_data[key])
             localStorage.setItem(key, object_data[key])
         }
     }
@@ -15,7 +13,6 @@ export function saveToStorage(object_data) {
 
 function refreshToken() {
     const refreshToken = localStorage.getItem('refresh')
-    // console.log('refreshToken', refreshToken)
     let token = ''
     if (refreshToken) {
         Axios.post('/api/token/refresh/', {
@@ -23,10 +20,7 @@ function refreshToken() {
         }).then(response => {
             token = response.data.access
             localStorage.setItem('access', token)
-            // console.log('refreshToken()', token)
         }).catch(e => {
-            // console.log('error', e)
-
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             return null
@@ -42,9 +36,7 @@ function isTokenExpired(limit = 60) {
     if (localStorage.getItem('access') && tokenTime) {
         const now_in_seconds = Math.floor(new Date().getTime() / 1000)
         const dif = tokenTime - now_in_seconds
-        let result = (!tokenTime || dif < limit)
-        // console.log('isTokenExpired', result, dif)
-        return result
+        return !tokenTime || dif < limit
     }
     return null
 }
@@ -52,7 +44,6 @@ function isTokenExpired(limit = 60) {
 export function getAccessToken() {
     if (localStorage.getItem('access')) {
         if (isTokenExpired()) {
-            // console.log('token expired')
             let token = refreshToken()
 
             if (token) {
@@ -68,7 +59,6 @@ export function getAccessToken() {
         }
         return localStorage.getItem('access')
     }
-    // console.log('token not found')
     return null
 }
 
