@@ -6,7 +6,7 @@ from api.views import CoursesViewSet, UserViewSet, CustomTokenObtainPairView
 
 api_router = DefaultRouter()
 api_router.register('courses', CoursesViewSet, basename='courses')
-api_router.register('user', UserViewSet, basename='user')
+api_router.register('loginForm', UserViewSet, basename='loginForm')
 
 urlpatterns = [
                   # auth

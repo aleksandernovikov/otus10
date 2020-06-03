@@ -1,7 +1,8 @@
 import React from "react";
 import {Button} from "react-bootstrap";
+
 import {getAccessToken, logout} from "../../services/localStorageService";
-import LoginForm from "../loginForm";
+import LoginFormContainer from '../loginForm/loginFormContainer'
 
 export default class extends React.Component {
     state = {
@@ -28,7 +29,7 @@ export default class extends React.Component {
     render() {
         if (!this.state.loading) {
             if (!this.state.isUserLoggedIn) {
-                return <LoginForm onChange={this.userChange}/>
+                return <LoginFormContainer />
             }
             return <div className='h6'>Привет, {this.state.username}! <Button onClick={this.logout}>Выход</Button></div>
         }
