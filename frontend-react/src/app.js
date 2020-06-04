@@ -1,17 +1,19 @@
 import React from 'react'
 import {HashRouter as Router, Switch, Route} from "react-router-dom"
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 
 import rootReducer from './store/reducers'
 import Home from './pages/homePage'
 import CreateCourse from './components/courses/createCourse'
 import ViewCourse from './pages/courseDetailsPage'
+import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 
 const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeWithDevTools(applyMiddleware(thunk))
 )
 
 export default function () {

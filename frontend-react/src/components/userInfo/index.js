@@ -8,21 +8,21 @@ export default class extends React.Component {
     state = {
         loading: false,
         isUserLoggedIn: !!getAccessToken(),
-        username: localStorage.getItem('username'),
+        login: localStorage.getItem('username'),
     }
 
     logout = () => {
         logout()
         this.setState({
             isUserLoggedIn: false,
-            username: '',
+            login: '',
         })
     }
 
     userChange = (loggedIn) => {
         this.setState({
             isUserLoggedIn: loggedIn,
-            username: localStorage.getItem('username'),
+            login: localStorage.getItem('username'),
         })
     }
 

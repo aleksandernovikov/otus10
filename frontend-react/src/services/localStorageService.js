@@ -51,7 +51,7 @@ export function getAccessToken() {
                 saveToStorage({
                     access: token,
                     expired: data.exp,
-                    username: data.username,
+                    login: data.username,
                     firstName: data.firstName,
                     lastName: data.lastName
                 })

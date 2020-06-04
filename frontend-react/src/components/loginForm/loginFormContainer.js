@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux"
+import ReduxThunk from 'redux-thunk'
 
 import LoginForm from './loginForm'
 import {
     changeLogin,
     changePassword,
-    loginClick
 } from "../../store/loginForm/actions";
 
 
@@ -26,7 +26,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     changeLogin,
     changePassword,
-    loginClick
+    loginClick: (login, password) => {
+        console.log(login, password)
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

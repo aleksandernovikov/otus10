@@ -21,7 +21,7 @@ export default class extends React.Component {
                 <Button
                     className='mt-1'
                     size='sm'
-                    onClick={() => this.props.loginClick()}
+                    onClick={() => this.props.loginClick(this.props.login, this.props.password)}
                 >Войти</Button>
             </Form>
         )
