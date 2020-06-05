@@ -13,6 +13,7 @@ export const changePassword = password => ({
     payload: password
 })
 
-export const userAuthorized = () => ({
-    type: LOGIN_FORM_USER_AUTHORIZED
+export const userAuthorized = loggedIn => ({
+    type: LOGIN_FORM_USER_AUTHORIZED,
+    payload: loggedIn
 })

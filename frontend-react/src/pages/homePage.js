@@ -1,6 +1,7 @@
 import UserInfo from '../components/userInfo'
 import TableHeading from "../components/table/heading";
 import TableContent from "../components/table/content";
+import TableContainer from '../components/table/tableContainer'
 import React from "react";
 
 
@@ -20,6 +21,7 @@ export default class extends React.Component {
                             <TableHeading
                                 heading={['Название', 'Преподаватели', 'Дата начала', 'Дата окончания', 'Курс окончен']}/>
                             <TableContent/>
+                            {/*<TableContainer />*/}
                         </table>
                     </div>
                 </div>
