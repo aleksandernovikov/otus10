@@ -1,6 +1,7 @@
 import {
     LOGIN_FORM_CHANGE_LOGIN,
     LOGIN_FORM_CHANGE_PASSWORD,
+    LOGIN_FORM_USER_AUTHORIZED,
 } from "./actions";
 
 const initialState = {
@@ -21,6 +22,12 @@ export const loginFormReducer = (state = initialState, action) => {
             return {
                 ...state,
                 password: action.payload
+            }
+
+        case LOGIN_FORM_USER_AUTHORIZED:
+            return {
+                ...state,
+                loggedIn: action.payload
             }
 
         default:

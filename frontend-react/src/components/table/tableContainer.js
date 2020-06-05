@@ -1,33 +1,33 @@
 import React from "react";
 import TableContent from "./content";
 import {connect} from "react-redux";
-import {changeLoading} from "../../store/coursesTable/actions";
+import {changeData, changeLoading} from "../../store/coursesTable/actions";
+import {getCoursesList} from "../../services/api";
 
 
 class TableContainer extends React.Component {
+    componentDidMount() {
+        this.props.loadCoursesData()
+    }
+
     render() {
         return <TableContent {...this.props} />
     }
 }
 
 const mapStateToProps = state => {
-    console.log('!!! state', state.coursesTableContent)
     let {loading, data} = state.coursesTableContent
-    console.log(loading, data)
-
     return {loading, data}
 }
 
 const mapDispatchToProps = {
+    changeData,
     loadCoursesData: () => dispatch => {
         console.log('loadCoursesData !!!!!!')
-        //            getCoursesList().then(response_data => {
-        //             this.setState({
-        //                 loading: false,
-        //                 data: response_data
-        //             })
-        //         })
-        dispatch(changeLoading(false))
+        getCoursesList().then(response_data => {
+            dispatch(changeData(response_data))
+            dispatch(changeLoading(false))
+        })
     }
 }
 

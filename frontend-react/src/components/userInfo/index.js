@@ -26,13 +26,15 @@ export default class extends React.Component {
         })
     }
 
-    render() {
-        if (!this.state.loading) {
-            if (!this.state.isUserLoggedIn) {
-                return <LoginFormContainer />
-            }
-            return <div className='h6'>Привет, {this.state.username}! <Button onClick={this.logout}>Выход</Button></div>
+    getLoadingTemplate = () => <div>Загрузка...</div>
+
+    getMainTemplate = () => {
+        if (!this.state.isUserLoggedIn) {
+            return <LoginFormContainer/>
         }
-        return <div>Загрузка...</div>
+        return <div className='h6'>Привет, {this.state.username}! <Button onClick={this.logout}>Выход</Button></div>
     }
+
+    render = () => !this.state.loading ? this.getMainTemplate() : this.getLoadingTemplate()
+
 }

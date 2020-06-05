@@ -1,6 +1,6 @@
 import {
-    COURSES_TABLE_CHANGE_LOADING,
-    COURSES_TABLE_CHANGE_DATA
+    COURSE_DETAILS_CHANGE_DATA,
+    COURSE_DETAILS_CHANGE_LOADING
 } from './actions'
 
 const initialState = {
@@ -10,13 +10,13 @@ const initialState = {
 
 export const coursesTableReducer = (state = initialState, action) => {
     switch (action.type) {
-        case COURSES_TABLE_CHANGE_LOADING:
+        case COURSE_DETAILS_CHANGE_LOADING:
             return {
                 ...state,
                 loading: action.payload
             }
 
-        case COURSES_TABLE_CHANGE_DATA:
+        case COURSE_DETAILS_CHANGE_DATA:
             return {
                 ...state,
                 data: action.payload

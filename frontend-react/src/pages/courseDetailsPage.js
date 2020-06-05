@@ -5,6 +5,10 @@ import {getAccessToken} from "../services/localStorageService";
 import UserInfo from "../components/userInfo";
 import {Button} from "react-bootstrap";
 
+import CourseDetailsContainer from '../components/courseDetails/courseDetailsContainer'
+import CourseDetails from '../components/courseDetails/courseDetails'
+
+
 export default class extends React.Component {
     state = {
         loading: true,
@@ -73,7 +77,7 @@ export default class extends React.Component {
         )
     }
 
-    render() {
-        return !this.state.loading ? this.getMainTemplate() : this.getLoadingTemplate()
-    }
+    // render = () => !this.state.loading ? this.getMainTemplate() : this.getLoadingTemplate()
+    render = () => <CourseDetails />
+
 }
