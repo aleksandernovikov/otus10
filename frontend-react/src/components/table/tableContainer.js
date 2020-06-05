@@ -11,11 +11,11 @@ class TableContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('!!!',state)
-    return {
-        loading: state.coursesTableContent.loading,
-        data: state.coursesTableContent.data
-    }
+    console.log('!!! state', state.coursesTableContent)
+    let {loading, data} = state.coursesTableContent
+    console.log(loading, data)
+
+    return {loading, data}
 }
 
 const mapDispatchToProps = {
@@ -31,4 +31,4 @@ const mapDispatchToProps = {
     }
 }
 
-export default connect(mapStateToProps)(TableContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TableContainer)

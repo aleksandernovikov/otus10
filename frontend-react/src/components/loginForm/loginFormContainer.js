@@ -16,11 +16,8 @@ class LoginFormContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        login: state.loginForm.login,
-        password: state.loginForm.password,
-        loggedIn: state.loginForm.loggedIn
-    }
+    let {login, password, loggedIn} = state.loginForm
+    return {login, password, loggedIn}
 }
 
 const mapDispatchToProps = {
@@ -28,8 +25,13 @@ const mapDispatchToProps = {
     changePassword,
     loginClick: (login, password) => (dispatch) => {
         getTokens(login, password).then(userData => {
-            if ('access' in userData && 'refresh' in userData)
+            if ('access' in userData && 'refresh' in userData) {
+                console.log('authorized')
                 dispatch(userAuthorized(true))
+            } else {
+                console.log('!!!!', userData)
+            }
+
         }).catch(e => {
             console.log(e, 'user unauthorized')
             dispatch(userAuthorized(false))
@@ -37,5 +39,4 @@ const mapDispatchToProps = {
     }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
 export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer)

@@ -20,7 +20,6 @@ export default class extends React.Component {
                         <table className="table">
                             <TableHeading
                                 heading={['Название', 'Преподаватели', 'Дата начала', 'Дата окончания', 'Курс окончен']}/>
-                            {/*<TableContent/>*/}
                             <TableContainer />
                         </table>
                     </div>
