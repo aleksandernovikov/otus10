@@ -2,9 +2,6 @@ import React from "react";
 import {Button} from "react-bootstrap";
 
 export default class extends React.Component {
-    componentDidMount() {
-        console.log('componentDidMount')
-    }
 
     getLoadingTemplate = () => {
         return <div>Загрузка...</div>
@@ -13,7 +10,7 @@ export default class extends React.Component {
     getMainTemplate = () => {
         // const {title, teachers, start_date, end_date, finished} = this.props.data
         // let teachers_string = teachers.map(teacher => `${teacher.first_name} ${teacher.last_name}`).join(', ')
-        return <div>123</div>
+        return <div>courseDetails</div>
         // return (
         //     <div className="row bg-white rounded p-3 my-3">
         //         <div className="card">
@@ -40,7 +37,5 @@ export default class extends React.Component {
         // )
     }
 
-    // render = () => !this.props.loading ? this.getMainTemplate() : this.getLoadingTemplate()
-    render = () => this.getMainTemplate()
-
+    render = () => !this.props.loading ? this.getMainTemplate() : this.getLoadingTemplate()
 }

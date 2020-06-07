@@ -8,7 +8,7 @@ const initialState = {
     data: null
 }
 
-export const coursesTableReducer = (state = initialState, action) => {
+export const courseDetailsReducer = (state = initialState, action) => {
     switch (action.type) {
         case COURSE_DETAILS_CHANGE_LOADING:
             return {
