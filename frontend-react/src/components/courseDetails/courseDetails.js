@@ -2,11 +2,12 @@ import React from "react";
 import {Button} from "react-bootstrap";
 
 export default class extends React.Component {
-
+    enrollCourse = () => {
+        this.props.enroll(this.props.match.params.id)
+    }
     getLoadingTemplate = () => {
         return <div>Загрузка...</div>
     }
-
 
     getMainTemplate = () => {
         const {title, teachers, start_date, end_date, finished} = this.props.data

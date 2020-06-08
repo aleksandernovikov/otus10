@@ -1,7 +1,6 @@
 import React from "react";
 import {Button} from "react-bootstrap";
 
-import {getAccessToken, logout} from "../../services/localStorageService";
 import LoginFormContainer from '../loginForm/loginFormContainer'
 
 export default class extends React.Component {

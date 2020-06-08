@@ -2,12 +2,9 @@ import React from "react";
 import {connect} from "react-redux"
 
 import LoginForm from './loginForm'
-import {
-    changeLogin,
-    changePassword,
-    userAuthorized,
-} from "../../store/loginForm/actions";
+
 import {getTokens} from "../../services/api";
+import {changeAuthStatus, changeLogin, changePassword} from "../../store/userData/actions";
 
 
 class LoginFormContainer extends React.Component {
@@ -15,8 +12,8 @@ class LoginFormContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const {login, password, loggedIn} = state.loginForm
-    return {login, password, loggedIn}
+    const {login, password, isUserLoggedIn} = state.userData
+    return {login, password, isUserLoggedIn}
 }
 
 const mapDispatchToProps = {
@@ -25,13 +22,11 @@ const mapDispatchToProps = {
     loginClick: (login, password) => (dispatch) => {
         getTokens(login, password).then(userData => {
             if ('access' in userData && 'refresh' in userData) {
-                dispatch(userAuthorized(true))
-                dispatch(changeLogin(''))
-                dispatch(changePassword(''))
+                dispatch(changeAuthStatus(true))
             }
         }).catch(e => {
             console.log(e, 'user unauthorized')
-            dispatch(userAuthorized(false))
+            dispatch(changeAuthStatus(false))
         })
     }
 }

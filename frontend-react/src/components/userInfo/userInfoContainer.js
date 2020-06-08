@@ -1,15 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 import UserInfo from './userInfo'
-import {changeAuthStatus, changeDisplayName} from "../../store/userInfo/actions";
+
 import {getAccessToken, logout} from "../../services/localStorageService";
+import {changeAuthStatus, changeDisplayName} from "../../store/userData/actions";
 
 export class UserInfoContainer extends React.Component {
     componentDidMount() {
-        console.log('UserInfoContainer mount')
         let userAuthorized = !!getAccessToken()
-        console.log('userAuthorized', userAuthorized)
-
         if (userAuthorized){
             this.props.changeDisplayName(localStorage.getItem('login'))
         }
@@ -20,7 +18,7 @@ export class UserInfoContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    let {isUserLoggedIn, displayName} = state.userInfo
+    let {isUserLoggedIn, displayName} = state.userData
     return {
         isUserLoggedIn,
         displayName

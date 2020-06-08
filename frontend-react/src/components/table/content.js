@@ -17,7 +17,6 @@ export default class extends React.Component {
                 finished={item.finished}
             />
         )
-
         return <tbody>{rows}</tbody>
     }
 
