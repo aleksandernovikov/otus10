@@ -1,7 +1,7 @@
-import UserInfo from '../components/userInfo'
 import TableHeading from "../components/table/heading";
 import TableContainer from '../components/table/tableContainer'
 import React from "react";
+import UserInfoContainer from "../components/userInfo/userInfoContainer";
 
 
 export default class extends React.Component {
@@ -10,7 +10,7 @@ export default class extends React.Component {
             <div>
                 <div className='row bg-white rounded my-3 p-3'>
                     <div className="col-3 py-2">
-                        <UserInfo/>
+                        <UserInfoContainer />
                     </div>
                 </div>
                 <div className='row bg-white rounded my-3 p-3'>

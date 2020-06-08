@@ -7,7 +7,8 @@ import {
 const initialState = {
     login: '',
     password: '',
-    loggedIn: false
+    loggedIn: false,
+    authStatusChanged: null
 }
 
 export const loginFormReducer = (state = initialState, action) => {

@@ -2,7 +2,7 @@ import React from "react";
 import {courseEnroll, getCourseDetails} from "../services/api";
 import {Link} from "react-router-dom";
 import {getAccessToken} from "../services/localStorageService";
-import UserInfo from "../components/userInfo";
+import UserInfo from "../components/userInfo/userInfo";
 import {Button} from "react-bootstrap";
 
 import CourseDetailsContainer from '../components/courseDetails/courseDetailsContainer'

@@ -5,7 +5,6 @@ import {applyMiddleware, createStore} from "redux";
 
 import rootReducer from './store/reducers'
 import Home from './pages/homePage'
-import CreateCourse from './components/courses/createCourse'
 import ViewCourse from './pages/courseDetailsPage'
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
@@ -23,7 +22,6 @@ export default function () {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/course/:id' component={ViewCourse}/>
-                    <Route path='/create-course' component={CreateCourse}/>
                 </Switch>
             </Router>
         </Provider>

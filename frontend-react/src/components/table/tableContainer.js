@@ -1,6 +1,6 @@
 import React from "react";
-import TableContent from "./content";
 import {connect} from "react-redux";
+import TableContent from "./content";
 import {changeData, changeLoading} from "../../store/coursesTable/actions";
 import {getCoursesList} from "../../services/api";
 
@@ -23,10 +23,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     changeData,
     loadCoursesData: () => dispatch => {
-        console.log('loadCoursesData !!!!!!')
         getCoursesList().then(response_data => {
             dispatch(changeData(response_data))
             dispatch(changeLoading(false))
+        }).catch(e => {
+            console.log(e)
         })
     }
 }

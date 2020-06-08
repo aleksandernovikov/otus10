@@ -1,23 +1,17 @@
 import React from "react";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 import CourseDetails from './courseDetails'
 import {changeData, changeLoading} from "../../store/courseDetails/actions";
-import {connect} from "react-redux";
-import {withRouter} from "react-router";
+import {courseEnroll, getCourseDetails} from "../../services/api";
 
-// import {withRouter} from "react-router-dom";
 
 class CourseDetailsContainer extends React.Component {
     componentDidMount() {
-        console.log('id:', this.props.match.params.id)
+        this.props.loadCourseDetailsData(this.props.match.params.id)
     }
-    //     console.log('container props', this.props)
-    // console.log('container state', this.state)
-
-    // this.props.loadCourseDetailsData()
-    // }
 
     render = () => {
-        // console.log('render')
         return <CourseDetails {...this.props} />
     }
 }
@@ -32,10 +26,25 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     changeLoading,
-    changeData
-    // loadCourseDetailsData: () => {
-    //     console.log('loadCourseDetailsData')
-    // }
+    changeData,
+    loadCourseDetailsData: (courseId) => dispatch => {
+        dispatch(changeLoading(true))
+        getCourseDetails(courseId).then(response => {
+            dispatch(changeData(response))
+            dispatch(changeLoading(false))
+        }).catch(e => {
+            console.log(e)
+        })
+    },
+    enroll: (courseId) => dispatch => {
+        courseEnroll(courseId).then(result => {
+            let msg = result ? 'Поздравляем, вы записаны!' : 'Вы записались раннее!'
+            alert(msg)
+        }).catch(e => {
+            console.log(e)
+            alert('Необходимо авторизоваться!')
+        })
+    }
 }
 
 let withRouterCourseDetailsContainer = withRouter(CourseDetailsContainer)
