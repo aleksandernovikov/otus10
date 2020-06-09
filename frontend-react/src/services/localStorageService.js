@@ -63,7 +63,7 @@ export function getAccessToken() {
 }
 
 export function logout() {
-    const fields = ['access', 'refresh', 'expired', 'username', 'firstName', 'lastName']
+    const fields = ['access', 'refresh', 'expired', 'login', 'firstName', 'lastName']
     for (let key of fields) {
         localStorage.removeItem(key)
     }

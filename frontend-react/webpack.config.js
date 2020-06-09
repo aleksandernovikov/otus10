@@ -1,5 +1,4 @@
 var path = require('path');
-// var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
 
 let conf = {
@@ -20,7 +19,7 @@ let conf = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ["@babel/preset-env"],
+                        presets: ["@babel/preset-env", '@babel/preset-react'],
                         plugins: [
                             "@babel/plugin-transform-react-jsx",
                             "@babel/plugin-proposal-class-properties"

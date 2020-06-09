@@ -17,7 +17,6 @@ class CourseDetailsContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('state', state)
     return {
         loading: state.courseDetails.loading,
         data: state.courseDetails.data
@@ -41,7 +40,6 @@ const mapDispatchToProps = {
             let msg = result ? 'Поздравляем, вы записаны!' : 'Вы записались раннее!'
             alert(msg)
         }).catch(e => {
-            console.log(e)
             alert('Необходимо авторизоваться!')
         })
     }

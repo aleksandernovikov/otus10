@@ -18,10 +18,15 @@
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/plugin-transform-react-jsx": "^7.10.1",
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
+    "jest": "^26.0.1",
+    "react-test-renderer": "^16.13.1",
     "webpack": "^4.43.0",
     "webpack-bundle-tracker": "^0.4.3",
     "webpack-cli": "^3.3.11",
@@ -30,7 +35,8 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
