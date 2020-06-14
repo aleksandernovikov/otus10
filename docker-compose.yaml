@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  django:
+    build:
+      context: .
+      dockerfile: docker/django/Dockerfile
+
+    image: django:v1
+#    command: python manage.py runserver 0.0.0.0:8000
+    command: uwsgi --ini /code/docker/django/configs/uwsgi.ini
+#    command: pip3 freeze
+#    command:  ls -la /usr/lib/uwsgi/plugins
+    volumes:
+    - .:/code
+#    - sock:/sock
+    ports:
+    - "8000:8000"
