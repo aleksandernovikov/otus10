@@ -7,31 +7,31 @@ services:
     build:
       context: .
       dockerfile: docker/node/Dockerfile
-    command: ls -la
+    command: ls -la dst
+#    volumes:
+#    - ./docker/build:/app/frontend-react/dst
+
+  django:
+    image: django:v1
+    build:
+      context: .
+      dockerfile: docker/django/Dockerfile
+    command: gunicorn --bind unix:/run/gunicorn.sock otus10.wsgi:application
     volumes:
     - .:/code
+    - ./docker/sock:/run
+    depends_on:
+      - node
 
-#  django:
-#    image: django:v1
-#    build:
-#      context: .
-#      dockerfile: docker/django/Dockerfile
-#    command: gunicorn --bind unix:/run/gunicorn.sock otus10.wsgi:application
-#    volumes:
-#    - .:/code
-#    - ./docker/sock:/run
-#    depends_on:
-#      - node
-#
-#  nginx:
-#    image: nginx:v1
-#    build:
-#      context: .
-#      dockerfile: docker/nginx/Dockerfile
-#    ports:
-#      - "81:81"
-#    volumes:
-#      - .:/code
-#      - ./docker/sock:/run
-#    depends_on:
-#      - django
+  nginx:
+    image: nginx:v1
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "81:81"
+    volumes:
+      - .:/code
+      - ./docker/sock:/run
+    depends_on:
+      - django
