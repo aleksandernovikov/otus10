@@ -6,7 +6,7 @@ let conf = {
     entry: './src/main',
 
     output: {
-        path: path.resolve('../static/'),
+        path: path.resolve(__dirname, 'dst'),
         filename: "[name]-[hash].js",
         publicPath: 'static/'
     },

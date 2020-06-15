@@ -2,18 +2,36 @@ version: '3'
 
 services:
 
-  django:
+  node:
+    image: node:v1
     build:
       context: .
-      dockerfile: docker/django/Dockerfile
-
-    image: django:v1
-#    command: python manage.py runserver 0.0.0.0:8000
-    command: uwsgi --ini /code/docker/django/configs/uwsgi.ini
-#    command: pip3 freeze
-#    command:  ls -la /usr/lib/uwsgi/plugins
+      dockerfile: docker/node/Dockerfile
+    command: ls -la
     volumes:
     - .:/code
-#    - sock:/sock
-    ports:
-    - "8000:8000"
+
+#  django:
+#    image: django:v1
+#    build:
+#      context: .
+#      dockerfile: docker/django/Dockerfile
+#    command: gunicorn --bind unix:/run/gunicorn.sock otus10.wsgi:application
+#    volumes:
+#    - .:/code
+#    - ./docker/sock:/run
+#    depends_on:
+#      - node
+#
+#  nginx:
+#    image: nginx:v1
+#    build:
+#      context: .
+#      dockerfile: docker/nginx/Dockerfile
+#    ports:
+#      - "81:81"
+#    volumes:
+#      - .:/code
+#      - ./docker/sock:/run
+#    depends_on:
+#      - django
