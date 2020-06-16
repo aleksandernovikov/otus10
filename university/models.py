@@ -9,7 +9,6 @@ User = get_user_model()
 class CourseStudent(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
-
     course_entry_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -24,7 +23,6 @@ class Course(models.Model):
     Учебный курс
     """
     title = models.CharField('Course title', max_length=128)
-
     teachers = models.ManyToManyField(
         User,
         verbose_name='Teachers',
@@ -33,7 +31,6 @@ class Course(models.Model):
     )
 
     students = models.ManyToManyField(User, blank=True, through=CourseStudent)
-
     start_date = models.DateField('Сourse start date', default=datetime.date.today, blank=True, null=True)
     end_date = models.DateField('Course end date', blank=True, null=True)
 
@@ -48,7 +45,6 @@ class Course(models.Model):
 
     def enroll_student(self, user):
         exists = CourseStudent.objects.filter(student=user, course=self).exists()
-
         if not exists:
             entry = CourseStudent(student=user, course=self)
             entry.save()

@@ -8,7 +8,7 @@ class TestTokenAction(TestCase):
 
     def test_get_jwt_tokens(self):
         response = self.client.post('/api/token/get/', {
-            'username': 'loginForm',
+            'username': 'user',
             'password': '123'
         })
         self.assertEqual(response.status_code, 200)
