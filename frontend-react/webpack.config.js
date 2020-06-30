@@ -43,7 +43,7 @@ let conf = {
 
     plugins: [
         new BundleTracker({
-            filename: '../webpack-stats.json'
+            filename: './dst/webpack-stats.json'
         })
     ]
 };
